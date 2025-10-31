@@ -1,7 +1,7 @@
 #include <cstdint>
 
 class Chip8 {
-public:
+private:
   uint8_t V[16];
   uint8_t memory[4096];
 
@@ -15,8 +15,17 @@ public:
   uint8_t delay_timer;
   uint8_t sound_timer;
 
+  void init();
+
+public:
   uint8_t key[16];
   uint32_t video[64 * 32];
 
   bool drawFlag;
+
+  Chip8();
+  ~Chip8();
+
+  bool loadROM(const char *file_path);
+  void emulateCycle();
 };

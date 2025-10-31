@@ -1,7 +1,5 @@
 #include "time.h"
-#include <fstream>
 #include <iostream>
-#include <random>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -58,13 +56,13 @@ void Chip8::init() {
   srand(time(NULL));
 }
 
-bool Chip8::loadROM(char const *filename) {
+bool Chip8::loadROM(const char *file_path) {
   init();
 
-  printf("Loading ROM: %s\n", filename);
+  printf("Loading ROM: %s\n", file_path);
 
   // Open ROM file
-  FILE *rom = fopen(filename, "rb");
+  FILE *rom = fopen(file_path, "rb");
   if (rom == NULL) {
     std::cerr << "Failed to open ROM" << std::endl;
     return false;
@@ -418,7 +416,7 @@ void Chip8::emulateCycle() {
     case 0x0033:
       memory[index] = V[(opcode & 0x0F00) >> 8] / 100;
       memory[index + 1] = (V[(opcode & 0x0F00) >> 8] / 10) % 10;
-      memory[index  + 2] = V[(opcode & 0x0F00) >> 8] % 10;
+      memory[index + 2] = V[(opcode & 0x0F00) >> 8] % 10;
       pc += 2;
       break;
 
