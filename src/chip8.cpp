@@ -27,6 +27,10 @@ uint8_t fontset[FONTSET_SIZE] = {
     0xF0, 0x80, 0xF0, 0x80, 0x80  // F
 };
 
+Chip8::Chip8() { init(); }
+
+Chip8::~Chip8() {}
+
 const unsigned int START_ADDRESS = 0x200;
 
 void Chip8::init() {

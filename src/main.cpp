@@ -15,18 +15,16 @@ uint8_t keymap[16] = {
 
 int main(int argc, char **argv) {
 
-  // Command usage
   if (argc != 2) {
     cout << "Usage: chip8 <ROM file>" << endl;
     return 1;
   }
 
-  Chip8 chip8 = Chip8(); // Initialise Chip8
+  Chip8 chip8 = Chip8();
 
-  int w = 1024; // Window width
-  int h = 512;  // Window height
+  int w = 1024; // width
+  int h = 512;  // height
 
-  // The window we'll be rendering to
   SDL_Window *window = NULL;
 
   // Initialize SDL
@@ -74,8 +72,7 @@ load:
           exit(0);
 
         if (e.key.keysym.sym == SDLK_F1)
-          goto load; // *gasp*, a goto statement!
-                     // Used to reset/reload ROM
+          goto load; // Used to reset/reload ROM
 
         for (int i = 0; i < 16; ++i) {
           if (e.key.keysym.sym == keymap[i]) {
@@ -110,7 +107,6 @@ load:
       SDL_RenderPresent(renderer);
     }
 
-    // Sleep to slow down emulation speed
     std::this_thread::sleep_for(std::chrono::microseconds(1200));
   }
 }
